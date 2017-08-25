@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "ViewController2.h"
 
-@interface ViewController ()
+@interface ViewController () <ViewController2Delegate>
+
+@property (weak, nonatomic) IBOutlet UILabel* nameLabel;
 
 @end
 
@@ -19,11 +22,18 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    ViewController2 *vc = [segue destinationViewController];
+    vc.delegate = self;
+}
+
+-(void)passData:(NSString *)text{
+    self.nameLabel.text = text;
+}
 
 @end
